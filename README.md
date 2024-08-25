@@ -1,6 +1,8 @@
 # @rsbuild/plugin-vue2
 
-@rsbuild/plugin-vue2 is a Rsbuild plugin to do something.
+Provides support for Vue 2 SFC (Single File Components). The plugin internally integrates [vue-loader](https://vue-loader.vuejs.org/) v15.
+
+> @rsbuild/plugin-vue2 only supports Vue >= 2.7.0.
 
 <p>
   <a href="https://npmjs.com/package/@rsbuild/plugin-vue2">
@@ -28,21 +30,95 @@ export default {
 };
 ```
 
+After registering the plugin, you can import `*.vue` files in your code.
+
 ## Options
 
-### foo
+If you need to customize the compilation behavior of Vue, you can use the following configs.
 
-Some description.
+### vueLoaderOptions
 
-- Type: `string`
-- Default: `undefined`
-- Example:
+Options passed to `vue-loader`, please refer to the [vue-loader documentation](https://vue-loader.vuejs.org/) for detailed usage.
+
+- **Type:** `VueLoaderOptions`
+- **Default:**
 
 ```js
+const defaultOptions = {
+  compilerOptions: {
+    whitespace: "condense",
+  },
+  experimentalInlineMatchResource: true,
+};
+```
+
+- **Example:**
+
+```ts
 pluginVue2({
-  foo: "bar",
+  vueLoaderOptions: {
+    hotReload: false,
+  },
 });
 ```
+
+> The Vue 2 plugin is using the `vue-loader` v15. Please be aware that there may be configuration differences between v15 and the latest version.
+
+### splitChunks
+
+When [chunkSplit.strategy](/config/performance/chunk-split) set to `split-by-experience`, Rsbuild will automatically split `vue` and `router` related packages into separate chunks by default:
+
+- `lib-vue.js`: includes vue, vue-loader.
+- `lib-router.js`: includes vue-router.
+
+This option is used to control this behavior and determine whether the `vue` and `router` related packages need to be split into separate chunks.
+
+- **Type:**
+
+```ts
+type SplitVueChunkOptions = {
+  vue?: boolean;
+  router?: boolean;
+};
+```
+
+- **Default:**
+
+```ts
+const defaultOptions = {
+  vue: true,
+  router: true,
+};
+```
+
+- **Example:**
+
+```ts
+pluginVue({
+  splitChunks: {
+    vue: false,
+    router: false,
+  },
+});
+```
+
+## FAQ
+
+### /deep/ selector causes compilation error
+
+`/deep/` is a deprecated usage as of Vue v2.7. Since it is not a valid CSS syntax, CSS compilation tools like Lightning CSS will fail to compile it.
+
+You can use `:deep()` instead. See [Vue - Deep Selectors](https://vuejs.org/api/sfc-css-features.html#deep-selectors) for more details.
+
+```html
+<style scoped>
+  .a :deep(.b) {
+    /* ... */
+  }
+</style>
+```
+
+> You can also refer to [Vue - RFC 0023](https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md) for more details.
 
 ## License
 
