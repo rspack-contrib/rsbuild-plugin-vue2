@@ -14,7 +14,9 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -38,7 +40,8 @@
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
     "@playwright/test": "^1.45.3",
-    "@rsbuild/core": "^1.0.1-beta.11",
+    "@rsbuild/core": "^1.0.1-beta.16",
+    "@rsbuild/plugin-less": "1.0.1-beta.16",
     "@types/node": "^20.14.13",
     "nano-staged": "^0.8.0",
     "playwright": "^1.45.3",

@@ -1,7 +1,10 @@
+import { createRequire } from 'node:module';
 import type { RsbuildPlugin, RspackChain } from '@rsbuild/core';
 import { type VueLoaderOptions, VueLoaderPlugin } from 'vue-loader';
 import { VueLoader15PitchFixPlugin } from './VueLoader15PitchFixPlugin.js';
 import { applySplitChunksRule } from './splitChunks.js';
+
+const require = createRequire(import.meta.url);
 
 export type SplitVueChunkOptions = {
   /**
