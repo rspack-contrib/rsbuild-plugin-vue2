@@ -18,8 +18,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+  	"build": "rslib build",
+		"dev": "rslib build --watch",
     "lint": "biome check .",
     "lint:write": "biome check . --write",
     "prepare": "simple-git-hooks && npm run build",
@@ -43,6 +43,7 @@
     "@playwright/test": "^1.48.2",
     "@rsbuild/core": "^1.1.0",
     "@rsbuild/plugin-less": "1.1.0",
+    "@rslib/core": "^0.0.16",
     "@types/node": "^20.17.6",
     "nano-staged": "^0.8.0",
     "playwright": "^1.48.2",
