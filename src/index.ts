@@ -1,5 +1,9 @@
 import { createRequire } from 'node:module';
-import type { RsbuildPlugin, RspackChain } from '@rsbuild/core';
+import type {
+  EnvironmentConfig,
+  RsbuildPlugin,
+  RspackChain,
+} from '@rsbuild/core';
 import { type VueLoaderOptions, VueLoaderPlugin } from 'vue-loader';
 import { VueLoader15PitchFixPlugin } from './VueLoader15PitchFixPlugin.js';
 import { applySplitChunksRule } from './splitChunks.js';
@@ -41,7 +45,7 @@ export function pluginVue2(options: PluginVueOptions = {}): RsbuildPlugin {
       const VUE_REGEXP = /\.vue$/;
       const CSS_MODULES_REGEX = /\.modules?\.\w+$/i;
 
-      api.modifyEnvironmentConfig((config) => {
+      api.modifyEnvironmentConfig((config, { mergeEnvironmentConfig }) => {
         // Support `<style module>` in Vue SFC
         if (config.output.cssModules.auto === true) {
           config.output.cssModules.auto = (path, query) => {
@@ -54,7 +58,14 @@ export function pluginVue2(options: PluginVueOptions = {}): RsbuildPlugin {
           };
         }
 
-        return config;
+        const extraConfig: EnvironmentConfig = {
+          source: {
+            // should transpile all scripts from Vue SFC
+            include: [/\.vue/],
+          },
+        };
+
+        return mergeEnvironmentConfig(config, extraConfig);
       });
 
       api.modifyBundlerChain((chain, { CHAIN_ID }) => {
