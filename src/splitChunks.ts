@@ -1,4 +1,4 @@
-import type { CacheGroups, RsbuildPluginAPI, SplitChunks } from '@rsbuild/core';
+import type { RsbuildPluginAPI, Rspack, SplitChunks } from '@rsbuild/core';
 import type { SplitVueChunkOptions } from './index.js';
 
 const isPlainObject = (obj: unknown): obj is Record<string, unknown> =>
@@ -24,7 +24,10 @@ export const applySplitChunksRule = (
       return;
     }
 
-    const extraGroups: CacheGroups = {};
+    const extraGroups: Record<
+      string,
+      Rspack.OptimizationSplitChunksCacheGroup
+    > = {};
 
     if (options.router) {
       extraGroups.vue = {
