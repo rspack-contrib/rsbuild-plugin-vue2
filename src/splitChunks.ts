@@ -29,7 +29,7 @@ export const applySplitChunksRule = (
       Rspack.OptimizationSplitChunksCacheGroup
     > = {};
 
-    if (options.router) {
+    if (options.vue) {
       extraGroups.vue = {
         name: 'lib-vue',
         test: /node_modules[\\/](?:vue|vue-loader)[\\/]/,
