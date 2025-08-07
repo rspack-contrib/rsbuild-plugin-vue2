@@ -39,7 +39,7 @@
     "webpack": "^5.101.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@biomejs/biome": "^2.1.4",
     "@playwright/test": "^1.54.1",
     "@rsbuild/core": "^1.4.12",
     "@rsbuild/plugin-less": "1.3.1",
