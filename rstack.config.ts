@@ -13,7 +13,6 @@ define.test({
     // Let Rsbuild choose the mode based on the command.
     NODE_ENV: undefined,
   },
-  isolate: false,
 });
 
 define.fmt({
@@ -25,19 +24,4 @@ define.staged({
   '*.{json,json5,jsonc,md,mdx,css,scss,less,html,vue,yml,yaml}': 'rs fmt',
 });
 
-define.lint(({ globals, js, ts }) => [
-  js.configs.recommended,
-  ts.configs.recommended,
-  {
-    files: ['**/*.test.{ts,tsx}'],
-    languageOptions: {
-      globals: globals.rstest,
-    },
-  },
-  {
-    files: ['test/**/src/**/*.{js,jsx}'],
-    languageOptions: {
-      globals: globals.browser,
-    },
-  },
-]);
+define.lint(({ js, ts }) => [js.configs.recommended, ts.configs.recommended]);
