@@ -4,7 +4,7 @@ import type {
   Rspack,
   SplitChunks,
 } from '@rsbuild/core';
-import type { SplitVueChunkOptions } from './index.js';
+import type { SplitVueChunkOptions } from './index.ts';
 
 const isPlainObject = (obj: unknown): obj is Record<string, unknown> =>
   obj !== null &&
