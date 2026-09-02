@@ -1,9 +1,10 @@
+packages:
+  - 'playground'
+
 allowBuilds:
   core-js: false
-  simple-git-hooks: false
 minimumReleaseAgeExclude:
   - '@rsbuild/*'
-  - '@rsbuild/core@2.1.3'
   - '@rslib/*'
   - '@rslint/*'
   - '@rspack/*'

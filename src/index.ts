@@ -5,9 +5,9 @@ import type {
   RspackChain,
 } from '@rsbuild/core';
 import { type VueLoaderOptions, VueLoaderPlugin } from 'vue-loader';
-import { VueLoader15PitchFixPlugin } from './VueLoader15PitchFixPlugin.js';
-import { patchWebpackRuleSetCompiler } from './patchWebpackRuleSetCompiler.js';
-import { applySplitChunksRule } from './splitChunks.js';
+import { VueLoader15PitchFixPlugin } from './VueLoader15PitchFixPlugin.ts';
+import { patchWebpackRuleSetCompiler } from './patchWebpackRuleSetCompiler.ts';
+import { applySplitChunksRule } from './splitChunks.ts';
 
 const require = createRequire(import.meta.url);
 
